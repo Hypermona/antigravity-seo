@@ -197,9 +197,9 @@ try {
     $SkillsPath = "$TempDir\skills"
     if (Test-Path $SkillsPath) {
         Get-ChildItem -Directory $SkillsPath | ForEach-Object {
-            $target = "$SkillsBase\$($_.Name)"
-            New-Item -ItemType Directory -Force -Path $target | Out-Null
-            Copy-Item -Recurse -Force "$($_.FullName)\*" $target
+            $destDir = "$SkillsBase\$($_.Name)"
+            New-Item -ItemType Directory -Force -Path $destDir | Out-Null
+            Copy-Item -Recurse -Force "$($_.FullName)\*" $destDir
         }
     }
 
@@ -273,9 +273,9 @@ try {
             $extSkills = Join-Path $extDir 'skills'
             if (Test-Path $extSkills) {
                 Get-ChildItem -Directory $extSkills | ForEach-Object {
-                    $target = "$SkillsBase\$($_.Name)"
-                    New-Item -ItemType Directory -Force -Path $target | Out-Null
-                    Copy-Item -Recurse -Force "$($_.FullName)\*" $target
+                    $destDir = "$SkillsBase\$($_.Name)"
+                    New-Item -ItemType Directory -Force -Path $destDir | Out-Null
+                    Copy-Item -Recurse -Force "$($_.FullName)\*" $destDir
                 }
             }
             # Extension agents

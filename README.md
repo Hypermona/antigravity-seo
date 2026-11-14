@@ -208,6 +208,26 @@ You need [Claude Code](https://claude.com/product/claude-code) 1.0.33 or newer. 
 
 `/seo setup` prepares everything Claude SEO needs (its own Python environment and a headless browser) without touching the rest of your system. Run `/seo doctor` any time to check it.
 
+<details open>
+<summary><b>Google Antigravity Installation</b></summary>
+<br />
+
+Clone and run the installer (installs for Google Antigravity by default into `~/.agents/skills/`):
+
+```bash
+git clone --depth 1 https://github.com/Hypermona/antigravity-seo.git
+bash antigravity-seo/install.sh
+```
+
+Or Windows PowerShell:
+```powershell
+git clone --depth 1 https://github.com/Hypermona/antigravity-seo.git
+powershell -ExecutionPolicy Bypass -File antigravity-seo\install.ps1 -Target Antigravity
+```
+
+All 26 SEO skills are automatically registered and discovered in Antigravity IDE, Antigravity 2.0 Desktop, and `agy` CLI!
+</details>
+
 <details>
 <summary><b>Manual install: macOS and Linux</b></summary>
 <br />

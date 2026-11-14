@@ -129,12 +129,28 @@ DATAFORSEO_USERNAME=user DATAFORSEO_PASSWORD=pass ./scripts/claude-seo run dataf
 
 ## Using with Google Antigravity
 
-Antigravity discovers this project via `.claude-plugin/plugin.json`.
-Place the repo in `~/.gemini/antigravity/plugins/claude-seo/` or install via:
+Antigravity natively discovers skills in `~/.agents/skills/` (global) and `./.agents/skills/` (workspace), as well as plugins configured in `~/.gemini/config/`.
 
+### Installation for Antigravity
+
+Run the installer:
 ```bash
+# Unix / macOS / Linux / Git Bash (installs for Antigravity by default)
 bash install.sh
+
+# Or Windows PowerShell
+powershell -ExecutionPolicy Bypass -File install.ps1 -Target Antigravity
 ```
+
+To install into the current workspace instead of user home:
+```bash
+bash install.sh --workspace
+```
+
+Once installed:
+- All 26 skills are available via slash commands (e.g. `/seo audit <url>`, `/seo technical <url>`) or natural language.
+- Antigravity automatically activates the appropriate sub-skills based on prompt context.
+- Runtime tools execute through the isolated Python environment managed by `scripts/claude-seo`.
 
 ## Architecture
 

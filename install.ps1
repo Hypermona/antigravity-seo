@@ -1,11 +1,22 @@
-# Claude SEO Installer for Windows
+# SEO Skills Installer for Windows (Google Antigravity & Claude Code)
 # PowerShell installation script
+
+param(
+    [ValidateSet('Antigravity', 'Claude', 'All')]
+    [string]$Target = 'Antigravity',
+    [ValidateSet('Global', 'Workspace')]
+    [string]$Scope = 'Global'
+)
+
+if ($env:CLAUDE_SEO_TARGET) {
+    $Target = $env:CLAUDE_SEO_TARGET
+}
 
 $ErrorActionPreference = "Stop"
 
 Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "|   Claude SEO - Installer             |" -ForegroundColor Cyan
-Write-Host "|   Claude Code SEO Skill              |" -ForegroundColor Cyan
+Write-Host "|   SEO Skills - Installer             |" -ForegroundColor Cyan
+Write-Host "|   Target: $Target" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 
@@ -137,8 +148,17 @@ try {
 }
 
 # Set paths
-$SkillDir = "$env:USERPROFILE\.claude\skills\seo"
-$AgentDir = "$env:USERPROFILE\.claude\agents"
+$SkillsBase = if ($Target -eq 'Claude') {
+    if ($Scope -eq 'Workspace') { ".\.claude\skills" } else { "$env:USERPROFILE\.claude\skills" }
+} else {
+    if ($Scope -eq 'Workspace') { ".\.agents\skills" } else { "$env:USERPROFILE\.agents\skills" }
+}
+$SkillDir = "$SkillsBase\seo"
+$AgentDir = if ($Target -eq 'Claude') {
+    if ($Scope -eq 'Workspace') { ".\.claude\agents" } else { "$env:USERPROFILE\.claude\agents" }
+} else {
+    if ($Scope -eq 'Workspace') { ".\.agents\agents" } else { "$env:USERPROFILE\.agents\agents" }
+}
 $RepoUrl = "https://github.com/AgriciDaniel/claude-seo"
 # Pin to a specific release tag to prevent silent updates from main.
 # This default MUST be bumped on every release. CI guard
@@ -177,7 +197,7 @@ try {
     $SkillsPath = "$TempDir\skills"
     if (Test-Path $SkillsPath) {
         Get-ChildItem -Directory $SkillsPath | ForEach-Object {
-            $target = "$env:USERPROFILE\.claude\skills\$($_.Name)"
+            $target = "$SkillsBase\$($_.Name)"
             New-Item -ItemType Directory -Force -Path $target | Out-Null
             Copy-Item -Recurse -Force "$($_.FullName)\*" $target
         }
@@ -253,7 +273,7 @@ try {
             $extSkills = Join-Path $extDir 'skills'
             if (Test-Path $extSkills) {
                 Get-ChildItem -Directory $extSkills | ForEach-Object {
-                    $target = "$env:USERPROFILE\.claude\skills\$($_.Name)"
+                    $target = "$SkillsBase\$($_.Name)"
                     New-Item -ItemType Directory -Force -Path $target | Out-Null
                     Copy-Item -Recurse -Force "$($_.FullName)\*" $target
                 }
@@ -296,11 +316,15 @@ try {
     # Claude Code's Bash tool expands $HOME on Windows as well as Unix. The
     # replacement consumes the plugin-root token, so a second pass is a no-op.
     $pluginRunner = '"${CLAUDE_PLUGIN_ROOT}/scripts/claude-seo" run'
-    $manualRunner = '"$HOME/.claude/skills/seo/scripts/claude-seo" run'
+    $manualRunner = if ($Target -eq 'Claude') {
+        '"$HOME/.claude/skills/seo/scripts/claude-seo" run'
+    } else {
+        '"$HOME/.agents/skills/seo/scripts/claude-seo" run'
+    }
     $installedDocs = @()
     Get-ChildItem -Path $SkillsPath -Directory | ForEach-Object {
         $sourceRoot = $_.FullName
-        $targetRoot = "$env:USERPROFILE\.claude\skills\$($_.Name)"
+        $targetRoot = "$SkillsBase\$($_.Name)"
         $installedDocs += Get-ChildItem -Path $sourceRoot -Recurse -File -Filter '*.md' | ForEach-Object {
             $relative = $_.FullName.Substring($sourceRoot.Length).TrimStart('\','/')
             Get-Item (Join-Path $targetRoot $relative) -ErrorAction SilentlyContinue
@@ -311,7 +335,7 @@ try {
         $extSkills = Join-Path $_.FullName 'skills'
         Get-ChildItem -Path $extSkills -Directory -ErrorAction SilentlyContinue | ForEach-Object {
             $sourceRoot = $_.FullName
-            $targetRoot = "$env:USERPROFILE\.claude\skills\$($_.Name)"
+            $targetRoot = "$SkillsBase\$($_.Name)"
             $installedDocs += Get-ChildItem -Path $sourceRoot -Recurse -File -Filter '*.md' | ForEach-Object {
                 $relative = $_.FullName.Substring($sourceRoot.Length).TrimStart('\','/')
                 Get-Item (Join-Path $targetRoot $relative) -ErrorAction SilentlyContinue
@@ -338,13 +362,22 @@ try {
         $text = [System.IO.File]::ReadAllText($_.FullName)
         $pluginSetup = '"${CLAUDE_PLUGIN_ROOT}/scripts/claude-seo" setup'
         $pluginDoctor = '"${CLAUDE_PLUGIN_ROOT}/scripts/claude-seo" doctor'
-        $manualSetup = '"$HOME/.claude/skills/seo/scripts/claude-seo" setup'
-        $manualDoctor = '"$HOME/.claude/skills/seo/scripts/claude-seo" doctor'
+        $manualSetup = if ($Target -eq 'Claude') {
+            '"$HOME/.claude/skills/seo/scripts/claude-seo" setup'
+        } else {
+            '"$HOME/.agents/skills/seo/scripts/claude-seo" setup'
+        }
+        $manualDoctor = if ($Target -eq 'Claude') {
+            '"$HOME/.claude/skills/seo/scripts/claude-seo" doctor'
+        } else {
+            '"$HOME/.agents/skills/seo/scripts/claude-seo" doctor'
+        }
         $updated = $text.Replace($pluginRunner, $manualRunner)
         $updated = $updated.Replace($pluginSetup, $manualSetup)
         $updated = $updated.Replace($pluginDoctor, $manualDoctor)
+        $targetSkillsRel = if ($Target -eq 'Claude') { '/.claude/skills/' } else { '/.agents/skills/' }
         # Read-tool paths need the absolute skills directory, not a variable.
-        $updated = $updated.Replace('${CLAUDE_PLUGIN_ROOT}/skills/', (($env:USERPROFILE -replace '\\', '/') + '/.claude/skills/'))
+        $updated = $updated.Replace('${CLAUDE_PLUGIN_ROOT}/skills/', (($env:USERPROFILE -replace '\\', '/') + $targetSkillsRel))
         if ($updated -ne $text) {
             [System.IO.File]::WriteAllText($_.FullName, $updated, $utf8NoBom)
         }
@@ -361,6 +394,25 @@ try {
     if ($runtime.ExitCode -eq 10) {
         Write-Host "  [!] Core runtime installed, but Chromium setup is incomplete." -ForegroundColor Yellow
     }
+
+    # For Antigravity: register ~/.agents/skills in ~/.gemini/config/skills.json if config dir exists
+    if ($Target -ne 'Claude') {
+        $geminiConfigDir = "$env:USERPROFILE\.gemini\config"
+        if (Test-Path $geminiConfigDir) {
+            $skillsJsonPath = Join-Path $geminiConfigDir 'skills.json'
+            $configData = @{ entries = @() }
+            if (Test-Path $skillsJsonPath) {
+                try {
+                    $configData = Get-Content -Raw $skillsJsonPath | ConvertFrom-Json
+                } catch {}
+            }
+            $existingPaths = @($configData.entries | ForEach-Object { $_.path })
+            if ($existingPaths -notcontains '~/.agents/skills') {
+                $configData.entries += @{ path = '~/.agents/skills' }
+                $configData | ConvertTo-Json -Depth 5 | Set-Content -Path $skillsJsonPath -Encoding utf8
+            }
+        }
+    }
 } catch {
     Write-Host ""
     Write-Host "[x] Installation failed: $($_.Exception.Message)" -ForegroundColor Red
@@ -375,10 +427,21 @@ try {
 }
 
 Write-Host ""
-Write-Host "[+] Claude SEO installed successfully!" -ForegroundColor Green
+Write-Host "[+] SEO skills installed successfully for $Target!" -ForegroundColor Green
 Write-Host ""
-Write-Host "Usage:" -ForegroundColor Cyan
-Write-Host "  1. Start Claude Code:  claude"
-Write-Host "  2. Run commands:       /seo audit https://example.com"
-Write-Host ""
+if ($Target -ne 'Claude') {
+    Write-Host "Google Antigravity Usage:" -ForegroundColor Cyan
+    Write-Host "  1. Start Antigravity: agy (or open Antigravity IDE / Desktop)"
+    Write-Host "  2. Skills are automatically discovered in ~/.agents/skills"
+    Write-Host "  3. Use slash commands or prompts in chat:"
+    Write-Host "     - /seo audit https://example.com"
+    Write-Host "     - /seo technical https://example.com"
+    Write-Host ""
+}
+if ($Target -ne 'Antigravity') {
+    Write-Host "Claude Code Usage:" -ForegroundColor Cyan
+    Write-Host "  1. Start Claude Code:  claude"
+    Write-Host "  2. Run commands:       /seo audit https://example.com"
+    Write-Host ""
+}
 Write-Host "Python deps location: $installedReqFile" -ForegroundColor Gray

@@ -54,6 +54,29 @@ function Main {
         }
     }
 
+    # Also remove from Antigravity (.agents) locations if present
+    $agySkillDir = Join-Path (Join-Path $env:USERPROFILE ".agents") "skills"
+    $agyAgentDir = Join-Path (Join-Path $env:USERPROFILE ".agents") "agents"
+    if (Test-Path (Join-Path $agySkillDir "seo") -PathType Container) {
+        Remove-Item -Recurse -Force (Join-Path $agySkillDir "seo")
+        Write-Color Green "  Removed: $(Join-Path $agySkillDir 'seo')"
+        $removedSkills++
+    }
+    if (Test-Path $agySkillDir -PathType Container) {
+        foreach ($sub in @(Get-ChildItem -Path $agySkillDir -Directory -Filter "seo-*" -ErrorAction SilentlyContinue)) {
+            Remove-Item -Recurse -Force $sub.FullName
+            Write-Color Green "  Removed: $($sub.FullName)"
+            $removedSkills++
+        }
+    }
+    if (Test-Path $agyAgentDir -PathType Container) {
+        foreach ($ag in @(Get-ChildItem -Path $agyAgentDir -File -Filter "seo-*.md" -ErrorAction SilentlyContinue)) {
+            Remove-Item -Force $ag.FullName
+            Write-Color Green "  Removed: $($ag.FullName)"
+            $removedAgents++
+        }
+    }
+
     Write-Host ""
     if ($removedSkills -eq 0 -and $removedAgents -eq 0) {
         Write-Color Yellow "Nothing to remove. Claude SEO does not appear to be installed."

@@ -1,43 +1,38 @@
 <!--
-  Claude SEO (claude-seo): free, open-source SEO audit plugin for Claude Code by Agrici Daniel.
+  Claude SEO for Antigravity: free, open-source SEO audit skills for Google Antigravity and Claude Code.
   Technical SEO, Core Web Vitals, E-E-A-T, Schema.org, AI search (GEO), local SEO, e-commerce and international SEO.
   26 sub-skills and 19 specialist agents. MIT licensed.
 -->
 
-<img src="assets/readme/v3/hero.svg" width="1200" height="420" alt="Claude SEO: rank in Google, get cited by AI. Three bots climb from #48 to #1 by fixing crawl, speed, schema, AI access and authority, then Google, ChatGPT, Perplexity, Gemini and Claude cite the site." />
+<img src="assets/readme/v3/hero.svg" width="1200" height="420" alt="Claude SEO for Antigravity: rank in Google, get cited by AI. Three bots climb from #48 to #1 by fixing crawl, speed, schema, AI access and authority, then Google, ChatGPT, Perplexity, Gemini and Claude cite the site." />
 
-<h1 align="center">Claude SEO</h1>
+<h1 align="center">Claude SEO for Antigravity</h1>
 
 <p align="center">
-  <b>Free, open-source SEO audits inside <a href="https://claude.com/product/claude-code">Claude Code</a>.</b><br />
+  <b>Comprehensive SEO analysis skills for <a href="https://antigravity.google">Google Antigravity</a> and <a href="https://claude.com/product/claude-code">Claude Code</a>.</b><br />
   Rank higher in Google and get cited by AI search.
 </p>
 
 <p align="center">
   <a href="#install">Install</a> ·
+  <a href="#antigravity--installer-commands">Commands</a> ·
   <a href="#see-it-in-action">Demo</a> ·
   <a href="#real-results">Results</a> ·
   <a href="#meet-the-team">Team</a> ·
-  <a href="#commands">Commands</a> ·
   <a href="#pricing">Pricing</a> ·
   <a href="#faq">FAQ</a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/AgriciDaniel/claude-seo/actions/workflows/ci.yml"><img src="https://github.com/AgriciDaniel/claude-seo/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="https://antigravity.google"><img src="https://img.shields.io/badge/Google%20Antigravity-Agent%20Skills-4285F4?logo=google" alt="Google Antigravity" /></a>
   <a href="https://claude.com/product/claude-code"><img src="https://img.shields.io/badge/Claude%20Code-Plugin-blue" alt="Claude Code plugin" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
-  <a href="https://github.com/AgriciDaniel/claude-seo/releases"><img src="https://img.shields.io/github/v/release/AgriciDaniel/claude-seo" alt="Version" /></a>
+  <a href="https://github.com/Hypermona/antigravity-seo/releases"><img src="https://img.shields.io/github/v/release/Hypermona/antigravity-seo" alt="Version" /></a>
   <a href="tests/"><img src="https://img.shields.io/badge/tests-2357%20passing-brightgreen" alt="Tests" /></a>
-  <a href="https://github.com/AgriciDaniel/claude-seo"><img src="https://img.shields.io/github/stars/AgriciDaniel/claude-seo?style=flat" alt="GitHub stars" /></a>
-  <a href="https://www.skool.com/ai-marketing-hub-pro"><img src="https://img.shields.io/badge/AI%20Marketing%20Hub-Pro%20community-purple" alt="AI Marketing Hub Pro community" /></a>
+  <a href="https://github.com/Hypermona/antigravity-seo"><img src="https://img.shields.io/github/stars/Hypermona/antigravity-seo?style=flat" alt="GitHub stars" /></a>
 </p>
 
-<p align="center">
-  <a href="https://trendshift.io/repositories/21053"><img src="https://trendshift.io/api/badge/repositories/21053" alt="AgriciDaniel/claude-seo on Trendshift: GitHub Trending #12 Repository Of The Day" width="250" height="55" /></a>
-</p>
-
-**Claude SEO is a free SEO plugin for Claude Code.** Give it any website and it runs a full SEO audit in 10 to 15 minutes, then hands you a clear action plan, sorted by what matters most.
+**Claude SEO for Antigravity is a free, open-source SEO skill suite tailored for Google Antigravity and Claude Code.** Give it any website and it runs a full SEO audit in 10 to 15 minutes, then hands you a clear action plan, sorted by what matters most.
 
 It checks everything a good SEO consultant would:
 
@@ -112,6 +107,33 @@ The project's own site, [claude-seo.md](https://claude-seo.md), audited with Cla
 ## Commands
 
 <img src="assets/readme/v3/map.svg" width="1200" height="420" alt="The six groups of SEO commands on a map: audits, technical SEO, content, schema and AI search, local and commerce, and extensions. The crew walks the path and each of the 30 commands is ticked off." />
+
+### Antigravity & Installer Commands
+
+Claude SEO for Antigravity introduces multi-target installation, workspace scoping, and native Antigravity execution:
+
+| Command | Platform | Description |
+|---|---|---|
+| `bash install.sh` (or `bash install.sh --antigravity`) | Google Antigravity | Installs all 26 skills into `~/.agents/skills/` and registers global discovery in `~/.gemini/config/skills.json`. |
+| `bash install.sh --workspace` | Google Antigravity | Installs skills into current project `./.agents/skills/` for team version control. |
+| `bash install.sh --claude` | Claude Code | Installs skills for Claude Code (`~/.claude/skills/`). |
+| `bash install.sh --all` | Antigravity + Claude | Dual install: deploys to both Antigravity and Claude Code simultaneously. |
+| `powershell -File install.ps1` | Windows PowerShell | Installs for Antigravity into `$HOME\.agents\skills\`. |
+| `powershell -File install.ps1 -Target Claude` | Windows PowerShell | Installs for Claude Code into `$HOME\.claude\skills\`. |
+| `powershell -File install.ps1 -Target All` | Windows PowerShell | Installs for both platforms on Windows. |
+| `powershell -File install.ps1 -Scope Workspace` | Windows PowerShell | Installs into project `./.agents/skills/`. |
+| `bash uninstall.sh` | Shell | Uninstalls skills and agents from both `~/.agents/` and `~/.claude/`. |
+| `powershell -File uninstall.ps1` | Windows PowerShell | Cleans up installed skills from both Antigravity and Claude Code locations. |
+
+#### Using with Antigravity
+
+In Google Antigravity (IDE, Antigravity 2.0 Desktop app, or `agy` CLI):
+- **Slash commands**: Run any command directly (e.g. `/seo audit <url>`, `/seo technical <url>`, `/seo geo <url>`, `/seo schema <url>`).
+- **Conversational activation**: Simply ask in chat (*"Run a full technical and schema audit for https://example.com"*). Antigravity automatically detects the matching skill and invokes the specialist agent workflow.
+
+---
+
+### Core SEO Commands
 
 30 core and extension commands in six groups. Open one to see what is inside; a few more extension commands are in the [full command reference](docs/COMMANDS.md).
 
@@ -196,9 +218,40 @@ Want the details? Read the [methodology](skills/seo/references/thinking-framewor
 
 ## Install
 
-<img src="assets/readme/v3/install.svg" width="1200" height="420" alt="Installing Claude SEO: add the marketplace, install the plugin, 26 skills and 19 agents arrive, /seo setup readies the browser, then /seo audit starts the first level." />
+<img src="assets/readme/v3/install.svg" width="1200" height="420" alt="Installing Claude SEO for Antigravity" />
 
-You need [Claude Code](https://claude.com/product/claude-code) 1.0.33 or newer. Run these three commands inside it:
+### Google Antigravity (Default)
+
+Install directly into `~/.agents/skills/` (and register globally in Antigravity):
+
+```bash
+# Unix, macOS, Linux, or Git Bash on Windows
+git clone --depth 1 https://github.com/Hypermona/antigravity-seo.git
+bash antigravity-seo/install.sh
+```
+
+Or with Windows PowerShell:
+```powershell
+git clone --depth 1 https://github.com/Hypermona/antigravity-seo.git
+powershell -ExecutionPolicy Bypass -File antigravity-seo\install.ps1
+```
+
+**Workspace-scoped install (for your project repository):**
+```bash
+bash antigravity-seo/install.sh --workspace
+```
+Or with PowerShell:
+```powershell
+powershell -ExecutionPolicy Bypass -File antigravity-seo\install.ps1 -Scope Workspace
+```
+
+All 26 SEO skills are automatically registered and discovered in Antigravity IDE, Antigravity 2.0 Desktop, and `agy` CLI!
+
+---
+
+### Claude Code
+
+If using Claude Code, install via plugin marketplace:
 
 ```bash
 /plugin marketplace add AgriciDaniel/claude-seo
@@ -206,74 +259,35 @@ You need [Claude Code](https://claude.com/product/claude-code) 1.0.33 or newer. 
 /seo setup
 ```
 
-`/seo setup` prepares everything Claude SEO needs (its own Python environment and a headless browser) without touching the rest of your system. Run `/seo doctor` any time to check it.
+Or install manually for Claude Code:
+```bash
+bash antigravity-seo/install.sh --claude
+```
 
-<details open>
-<summary><b>Google Antigravity Installation</b></summary>
-<br />
+Or install for both Antigravity and Claude Code simultaneously:
+```bash
+bash antigravity-seo/install.sh --all
+```
 
-Clone and run the installer (installs for Google Antigravity by default into `~/.agents/skills/`):
+`/seo setup` prepares everything needed (its own isolated Python environment and a headless browser) without touching the rest of your system. Run `/seo doctor` any time to check readiness.
+
+**Your first audit in Google Antigravity:**
 
 ```bash
-git clone --depth 1 https://github.com/Hypermona/antigravity-seo.git
-bash antigravity-seo/install.sh
+agy                                      # start Antigravity CLI (or open IDE / Desktop app)
+
+/seo audit https://example.com           # full site audit with a prioritized plan
+/seo technical https://example.com       # crawlability, speed, Core Web Vitals
+/seo page https://example.com/pricing    # one page, in depth
+/seo geo https://example.com             # how ready you are for AI search
+/seo schema https://example.com          # check and generate structured data
+/seo local https://example.com           # local SEO and Google Business Profile
+
+# Or simply ask naturally:
+# "Run an SEO audit on https://example.com and check schema and technical health"
 ```
 
-Or Windows PowerShell:
-```powershell
-git clone --depth 1 https://github.com/Hypermona/antigravity-seo.git
-powershell -ExecutionPolicy Bypass -File antigravity-seo\install.ps1 -Target Antigravity
-```
-
-All 26 SEO skills are automatically registered and discovered in Antigravity IDE, Antigravity 2.0 Desktop, and `agy` CLI!
-</details>
-
-<details>
-<summary><b>Manual install: macOS and Linux</b></summary>
-<br />
-
-<img src="assets/readme/v3/plat-unix.svg" width="1200" height="260" alt="Manual install: macOS and Linux: the install typed out in a terminal" />
-
-```bash
-git clone --depth 1 https://github.com/AgriciDaniel/claude-seo.git
-bash claude-seo/install.sh
-```
-
-One-liner (curl, review then run):
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/AgriciDaniel/claude-seo/main/install.sh > install.sh
-cat install.sh        # review before running
-bash install.sh
-rm install.sh
-```
-
-</details>
-
-<details>
-<summary><b>Manual install: Windows (PowerShell)</b></summary>
-<br />
-
-<img src="assets/readme/v3/plat-win.svg" width="1200" height="260" alt="Manual install: Windows (PowerShell): the install typed out in a terminal" />
-
-```powershell
-git clone --depth 1 https://github.com/AgriciDaniel/claude-seo.git
-powershell -ExecutionPolicy Bypass -File claude-seo\install.ps1
-```
-
-> **Why `git clone` instead of `irm | iex`?** Claude Code's own security guardrails flag `irm ... | iex` as a supply chain risk: downloading and executing remote code without verification. The `git clone` approach lets you inspect `claude-seo\install.ps1` before running it.
-
-</details>
-
-> **Two versions.** This public version is MIT licensed and free for everyone. [AI Marketing Hub Pro](https://www.skool.com/ai-marketing-hub-pro) members also get a private version with early access to new features. Members install it with:
->
-> ```bash
-> /plugin marketplace add AI-Marketing-Hub/claude-seo
-> /plugin install claude-seo@ai-marketing-hub-claude-seo
-> /seo setup
-> ```
-
-**Your first audit:**
+**Your first audit in Claude Code:**
 
 ```bash
 claude                                   # start Claude Code
@@ -288,10 +302,10 @@ claude                                   # start Claude Code
 ## FAQ
 
 <details>
-<summary><b>What is Claude SEO?</b></summary>
+<summary><b>What is Claude SEO for Antigravity?</b></summary>
 <br />
 
-A free, open-source SEO audit tool that runs inside Claude Code. It checks technical SEO, Core Web Vitals, content quality, Schema.org structured data, AI search readiness, local SEO, e-commerce and international SEO, then gives you a prioritized action plan. It follows Google's own documentation, including the [AI Optimization Guide](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide).
+A comprehensive, open-source SEO audit suite adapted to run natively inside Google Antigravity (IDE, Antigravity 2.0 Desktop app, and `agy` CLI) as well as Claude Code. It checks technical SEO, Core Web Vitals, content quality, Schema.org structured data, AI search readiness (GEO), local SEO, e-commerce and international SEO, then gives you a prioritized action plan. It follows Google's own documentation, including the [AI Optimization Guide](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide).
 
 </details>
 
@@ -339,7 +353,7 @@ Crawlers like Screaming Frog crawl faster and deeper, and big SEO suites have th
 <summary><b>Does my data leave my computer?</b></summary>
 <br />
 
-Claude SEO runs inside Claude Code, so the pages and data it analyzes are sent to Claude, Anthropic's model, the same as anything else you work on in Claude Code. Reports are saved as files on your machine. No SEO service or other third party sees your data unless you connect an extension or API yourself. Besides the site you audit, some checks read public sources such as Wikipedia, Reddit and Common Crawl. See [PRIVACY.md](PRIVACY.md) for the full list.
+Claude SEO runs inside Google Antigravity or Claude Code, so the pages and data it analyzes are processed by your chosen model provider (e.g. Google DeepMind Gemini in Antigravity or Anthropic Claude in Claude Code), the same as anything else you work on in your assistant environment. Reports are saved as files on your machine. No SEO service or other third party sees your data unless you connect an extension or API yourself. Besides the site you audit, some checks read public sources such as Wikipedia, Reddit and Common Crawl. See [PRIVACY.md](PRIVACY.md) for the full list.
 
 </details>
 
@@ -347,17 +361,22 @@ Claude SEO runs inside Claude Code, so the pages and data it analyzes are sent t
 <summary><b>Good to know: requirements, limits and uninstall</b></summary>
 <br />
 
-**Requirements.** Claude Code 1.0.33 or newer and Python 3.11 to 3.14. `/seo setup` installs the headless browser for you.
+**Requirements.** Google Antigravity or Claude Code 1.0.33 or newer, and Python 3.11 to 3.14. `/seo setup` installs the headless browser for you.
 
-**Cost of a full audit.** Five agents that need more judgment run on Opus and the rest on Sonnet, so a full `/seo audit` uses more of your Claude plan than a single-page check. You can change any agent's model in its file under [`agents/`](agents/).
+**Cost of a full audit.** In Claude Code, five agents that need more judgment run on Opus and the rest on Sonnet, so a full `/seo audit` uses more of your Claude plan than a single-page check. In Google Antigravity, agents run on your configured Gemini model. You can change any agent's model in its file under [`agents/`](agents/).
 
 **Limits.** Without Google API keys, Core Web Vitals are lab estimates and indexing is inferred from the page. Pages that load key content only after scrolling or clicking can give noisy results.
 
-**Uninstall.** Installed as a plugin: `/plugin uninstall claude-seo@agricidaniel-claude-seo`. Installed manually:
+**Uninstall.** Installed as a Claude Code plugin: `/plugin uninstall claude-seo@agricidaniel-claude-seo`. Installed for Antigravity or manual Claude Code install:
 
 ```bash
-git clone --depth 1 https://github.com/AgriciDaniel/claude-seo.git
-bash claude-seo/uninstall.sh
+bash antigravity-seo/uninstall.sh
+```
+
+Or on Windows:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File antigravity-seo\uninstall.ps1
 ```
 
 </details>
